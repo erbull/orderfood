@@ -1,0 +1,38 @@
+<style>
+    .insert-message{
+        position: absolute;
+        background-color: whitesmoke;
+        width: 300px;
+        height: 200px;
+        top:0;
+        right: 0;
+        color: var(--color);
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 5px; 
+        display: none;
+    }
+
+    .insert-message>div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 50%;
+    }
+
+    .insert-message button{
+        width: 100px;
+        height: 40px;
+    }
+</style>
+
+<div class="insert-message">
+    <div>
+        <p>Ürün sepetinize eklendi.</p>  
+    </div>
+    <div class="buttons">
+        <a href="/food/basket"><button class="button">Sepete git</button></a>
+        <button class="button" onclick="closeMessage(this)">Devam et</button>
+    </div>
+</div>

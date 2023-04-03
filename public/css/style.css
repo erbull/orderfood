@@ -1,0 +1,83 @@
+:root {
+    padding: 0;
+    margin: 0;
+    --bg-color: burlywood;
+    --color: rgb(83, 4, 4);
+}
+
+/*Phones*/
+@media screen and (max-width: 479px){
+    :root {
+        --width: 320px;
+    }
+}
+
+/*Phones*/
+@media screen and (min-width: 480px) and (max-width: 767px){
+    :root {
+        --width: 480px;
+    }
+}
+
+/*Tablet*/
+@media screen and (min-width: 768px) and (max-width:991px){
+    :root{
+        --width: 768px;
+    }
+}
+
+/*Laptop*/
+@media screen and (min-width: 992px) and (max-width: 1199px){
+    :root{
+        --width: 992px;
+    }
+}
+
+/*Desktop*/
+@media screen and (min-width:1200px) and (max-width:1920px){
+    :root{
+        --width: 1200px;
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+.container{
+    width: var(--width);
+    margin-inline: auto;
+}
+
+.header{
+    color: var(--color);
+    text-align: center;
+    font-family: 'Climate Crisis', sans-serif;
+    margin-inline: auto;
+}
+
+.header .buttons{
+    max-width: var(--width);
+    display: flex; 
+    justify-content: end; 
+}
+
+.header-img {
+    mix-blend-mode: color-burn;
+    width: 300px;
+    margin-block: 70px;
+}
+
+.buttons button{
+    height: 30px;
+    width: 70px;
+    margin-left: 10px;
+}
+
+/*Phones*/
+@media screen and (max-width: 767px){
+    .header-img {
+        margin-bottom: 20px;
+    }
+}
+

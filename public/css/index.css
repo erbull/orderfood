@@ -1,0 +1,164 @@
+section{
+    padding-top:150px;
+    padding-bottom:50px;
+}
+
+.main {
+    background-image: url(/public/img/hero-bg_eiqgsm.webp);
+    background-repeat: repeat;
+}
+
+.sticky{
+    position: sticky !important;
+    top: 0px;
+    z-index: 1;
+    background-color: var(--bg-color);
+}
+
+.sticky .title{
+    position: relative;
+    align-items: center;
+    display:flex;
+    justify-content: center;
+}
+
+.sticky .title h1{
+    margin: 0;
+}
+
+.sticky .basket{
+    position: absolute;
+    right:10px;
+    top:5px;
+}
+
+.basket .counter{
+    position: absolute;
+    top:-5px;
+    right: -5px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    color: red;
+    font-size: 1rem;
+    font-weight:700;
+}
+
+.sticky .toggle-menu-button{
+    position: absolute;
+    right: 0;
+    top:10px;
+    display: none;
+}
+
+.nav-menu {
+    border: 2px solid rgb(83, 4, 4);
+    border-radius: 5px;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    list-style-type: none;
+    height: 70px;
+    background-color: rgb(250, 176, 85);
+}
+
+.nav-item {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: x-large;
+    color: rgb(83, 4, 4);
+}
+
+.main-text{
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.main-content {
+    display: flex;
+    text-align: left;
+    justify-content: flex-start;
+    overflow: auto;
+    padding-bottom: 10px;
+}
+
+.button{
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.button:active{
+    box-shadow: 2px 2px 6px rgb(79, 1, 1) inset;
+}
+
+/*.box:hover {
+    background-color: rgb(252, 97, 41);
+}*/
+
+/*Phones*/
+@media screen and (max-width: 767px){
+    section{
+        padding-top:70px;
+        padding-bottom:0px;
+    }
+
+    .title{
+        position:relative;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sticky .basket{
+        position: absolute;
+        right:50px;
+        top:0px;
+    }
+    
+    .sticky .toggle-menu-button{
+        display: block;
+    }
+
+    .sticky:has(.toggle-menu-button:focus) #navbar{
+        display: block;
+    }
+
+    #navbar{
+        display: none;
+    }
+
+    #navbar:hover{
+        display: block;        
+    }
+
+    .nav-menu {
+        display:block;
+        height: auto;
+    }
+
+    .nav-menu li {
+        margin-block: 15px;
+    }
+
+    .main-text{
+        margin-bottom: 0px;
+    }
+}
+
+/*Tablet*/
+@media screen and (min-width: 768px) and (max-width:991px){
+
+}
+
+/*Laptop*/
+@media screen and (min-width: 992px) and (max-width: 1199px){
+
+}
+
+/*Desktop*/
+@media screen and (min-width:1200px) and (max-width:1920px){
+
+}

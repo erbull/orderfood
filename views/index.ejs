@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="/public/css/index.css">
+ 
+<div class="sticky">   
+    <div class="title container">
+        <a class="basket" href="food/basket">
+            <img src="/public/img/basket.png" height="40" width="40"/>
+            <div class="counter"></div>
+        </a>
+        <img class="toggle-menu-button" tabindex="0" src="/public/img/menu-icon.svg" height="20" width="30"/>   
+        <h1>FAST FOODS</h1>
+    </div>
+       
+    <% const menuList = [{id:1, name:"Breakfast"}, {id:2, name:"Burger"}, {id:3, name:"Hotdog"}, {id:4, name:"Pizza"}, {id:5, name:"Dessert"}, {id:6, name:"Home Service"}]%>    
+    
+    <div id="navbar" class="navbar container">
+        <ul class="nav-menu" >
+            <% menuList.forEach(menu =>{%>
+               <li><a class="nav-item" href=<%- '#' + menu.name.replace(" ", "")%>><%- menu.name%></a></li> 
+            <%})%>
+        </ul>        
+    </div>
+</div>
+
+<div class="main">
+
+    <% menuList.forEach((menu) =>{%>
+        <section id="<%- menu.name.replace(" ", "")%>" class="container">
+            <div class="main-text">
+                <h1><%- menu.name%></h1>
+            </div>
+
+            <div class="main-content">
+                <% 
+                const foods = data.filter(el => el.type === menu.id);
+                foods.forEach(_food => {%>
+                    <%- include('food/foodCard', {food: _food})%>
+                <%})%>        
+            </div>
+        </section>
+    <%}) %>
+</div>
+
+<script>
+    countBasket();
+
+    function addFood(el, _food){
+        let itemList = [];
+        let items = [];
+        const food = JSON.parse(_food);
+
+        const basket = sessionStorage.getItem('basket');
+        let isExist = false;
+        if(basket){
+            itemList = JSON.parse(sessionStorage.getItem('basket'));
+            itemList.forEach(el => {
+                if(el.id == food.id) {
+                    el.piece += 1;
+                    isExist = true;
+                } 
+            });
+
+            if(!isExist) itemList.push(food);
+            sessionStorage.setItem('basket', JSON.stringify(itemList))
+        }else{
+            itemList.push(food)
+            sessionStorage.setItem('basket', JSON.stringify(itemList))
+        }
+
+        el.parentElement.querySelector(".insert-message").style.display = "block";
+        countBasket();
+    }
+
+    function closeMessage(el){
+        el.parentElement.parentElement.style.display = "none";
+    }
+
+    function countBasket(){
+        const counter = JSON.parse(sessionStorage.getItem('basket')).length;
+        document.querySelector(".counter").innerHTML = counter > 0 ? counter : "";
+    }
+</script>

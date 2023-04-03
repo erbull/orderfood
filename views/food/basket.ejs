@@ -1,0 +1,144 @@
+<style>
+    .baskets{
+        margin-inline: auto;
+
+        border-spacing: 0 1em;
+    }
+    .baskets tr{
+        align-items: center;
+    }
+    .baskets td{
+        text-align: left;
+        align-items: center;
+        padding: 10px;
+    }
+    .baskets td:nth-child(2){
+        width: 50px;
+        background-size: contain;
+    }
+    .baskets td:nth-child(3){
+        width: 60px;
+        text-align: center;
+    }
+
+    .baskets td:nth-child(3) input{
+        margin: 2px;
+        height: 25px;
+        width: 25px;
+        text-align: center;
+        background-color: transparent;
+        border: none;
+        en
+    }
+
+    .baskets td:nth-child(3) button{
+        margin: 2px;
+        height: 25px;
+        width: 25px;
+        font-weight: 800;
+    }
+    .baskets td:nth-child(4){
+        width: 200px;
+    }
+    .baskets td:nth-child(5){
+        text-align: right;
+    }
+</style>
+
+<div class="container">
+    <table class="baskets">
+    </table>
+</div>
+
+<script>
+
+    refreshList();
+
+    function refreshList(){
+        document.querySelector(".baskets").innerHTML = "";
+        let baskets = [];
+        if(sessionStorage.basket) baskets = JSON.parse(sessionStorage.basket);
+        
+        if (baskets.length == 0)
+        document.querySelector(".baskets").innerHTML = "<tr><th>Sepetinizde henüz ürün bulunmuyor.</th></tr>";
+        
+        baskets.forEach((element) => {
+            insertBasket(element)
+        });
+
+        function insertBasket(food){
+            let basket = document.createElement("tr");
+
+            const colActive = document.createElement("td");
+            const active = document.createElement("input");
+            active.setAttribute("type", "checkbox");
+            active.checked = food.active;
+            
+            colActive.appendChild(active);
+            basket.appendChild(colActive);
+
+            const image = document.createElement("td");
+            image.style.backgroundImage = "URL('/public/img/" + food.image + "')";
+            basket.appendChild(image);
+
+            const foodPiece = document.createElement("td");
+            foodPiece.innerHTML = "<input type='text' value=" + food.piece + " disabled><br/>";
+            basket.appendChild(foodPiece);
+
+            const btnMinus = document.createElement("button");
+            btnMinus.innerHTML = "-";
+            btnMinus.value = food.id;
+            foodPiece.appendChild(btnMinus);
+
+            const btnPlus = document.createElement("button");
+            btnPlus.innerHTML = "+";
+            btnPlus.value = food.id;
+            foodPiece.appendChild(btnPlus);
+
+            const foodName = document.createElement("td");
+            foodName.innerHTML = food.name;
+            basket.appendChild(foodName);
+            
+            const price = document.createElement("td");
+            price.innerHTML = "CHF " + food.price.toFixed(2);
+            basket.appendChild(price);
+        
+            let btnSil = document.createElement("td");
+            btnSil.classList.add("removeBasket");
+            btnSil.value = food.id;
+            btnSil.innerHTML = "<th><button>Sil</button></th>";
+            basket.appendChild(btnSil);
+
+            document.querySelector(".baskets").appendChild(basket);
+
+            active.addEventListener("change", function(e){
+                food.active = e.target.checked;
+                sessionStorage.basket = JSON.stringify(baskets);
+            });
+
+            btnSil.addEventListener("click", function(e){
+                const _id = this.value;
+                const results = baskets.filter(el => el.id != _id);
+                
+                sessionStorage.basket = JSON.stringify(results);
+                refreshList();
+            });
+
+            btnPlus.addEventListener("click", function(e){
+                if(food.piece < 10)food.piece += 1;
+                sessionStorage.basket = JSON.stringify(baskets);
+                this.parentElement.querySelector("input").value = food.piece;
+            });
+
+            btnMinus.addEventListener("click", function(e){
+                if(food.piece > 0)food.piece -= 1;
+                sessionStorage.basket = JSON.stringify(baskets);
+                this.parentElement.querySelector("input").value = food.piece;
+            });
+        }
+
+        function removeBasket(){
+            alert("merhaba");
+        }
+    }
+</script>

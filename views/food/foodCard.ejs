@@ -1,0 +1,76 @@
+<style>
+    .box {
+        padding: 10px;
+        margin-inline: 10px;
+        background-color: burlywood;
+        border: 10px solid blanchedalmond;
+        border-radius: 5px;
+        transition: 0.5s;
+    }
+
+    .box:hover {
+        border: 10px solid rgb(163, 139, 102);
+    }
+
+    .box img {
+        border: 5px solid var(--green);
+        border-radius: 5px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 25px;
+        width: 250px;
+    }
+
+    .food-title{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .price{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 45px;
+        border-radius: 5px;
+        background-color: coral;
+        font-weight: 800;
+        color:whitesmoke;
+        border: solid 1px rgb(79, 1, 1);
+    }
+</style>
+
+<div class="box">
+    <%
+        const _food = JSON.stringify({
+            id: food._id,
+            name: food.name,
+            image: food.image,
+            price: food.price,
+            piece: 1,
+            active: true
+        });
+    %>
+    <div class="food-title">
+        <%if(food.price > 0){%>
+            <div class="price"><h3>CHF <%- food.price.toFixed(2)%></h3></div>
+        <%} else{%>
+            <div class="price"><h3>FREE</h3></div>
+        <%}%>
+        <%if(food.name != "Home Service"){%>
+            <div style="position: relative;">
+                <div class="price button" onclick="addFood(this, `<%= _food%>`)">
+                    <h3>ADD</h3>
+                </div>
+                <%- include("insertmessage")%>            
+            </div>
+        <%}%>
+    </div>
+
+    <img src=<%- "/public/img/" + food.image%> />
+    <h3><%- food.name%></h3>
+    <p><%- food.description%></p>
+</div>
+
