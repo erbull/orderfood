@@ -39,5 +39,5 @@ app.use("/user", userController);
 app.use("/food", foodController);
 
 app.listen(process.env.PORT, () => {
-    console.log(`SelfCheck, ${process.env.PORT} numapalı portta çalışıyor.`);
+    console.log(`OrderFood, ${process.env.PORT} numapalı portta çalışıyor.`);
 });
